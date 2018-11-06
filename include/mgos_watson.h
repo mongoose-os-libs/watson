@@ -31,12 +31,15 @@ extern "C" {
 #define MGOS_WATSON_EV_BASE MGOS_EVENT_BASE('I', 'B', 'M')
 
 /* In the comment, the type of `void *ev_data` is specified */
-enum mgos_azure_event {
+enum mgos_watson_event {
   /* Connected to the Azure cloud. Arg: NULL */
   MGOS_WATSON_EV_CONNECT = MGOS_WATSON_EV_BASE,
   /* Disonnected from the cloud. Arg: NULL */
   MGOS_WATSON_EV_CLOSE,
 };
+
+/* Returns true if Watson connection is up, false otherwise. */
+bool mgos_watson_is_connected(void);
 
 /*
  * Send an event, in JSON format.

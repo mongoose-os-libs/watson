@@ -46,6 +46,8 @@ static void watson_mqtt_ev(struct mg_connection *nc, int ev, void *ev_data,
       if (msg->connack_ret_code == 0) {
         ctx->is_connected = true;
         mgos_invoke_cb(ev_cb, (void *) MGOS_WATSON_EV_CONNECT, false);
+        struct mgos_cloud_arg arg = {.type = MGOS_CLOUD_WATSON};
+        mgos_event_trigger(MGOS_EVENT_CLOUD_CONNECTED, &arg);
       }
       break;
     }
@@ -53,6 +55,8 @@ static void watson_mqtt_ev(struct mg_connection *nc, int ev, void *ev_data,
       if (ctx->is_connected) {
         ctx->is_connected = false;
         mgos_invoke_cb(ev_cb, (void *) MGOS_WATSON_EV_CLOSE, false);
+        struct mgos_cloud_arg arg = {.type = MGOS_CLOUD_WATSON};
+        mgos_event_trigger(MGOS_EVENT_CLOUD_DISCONNECTED, &arg);
       }
       break;
   }
@@ -89,6 +93,10 @@ bool mgos_watson_send_event_jsonf(const char *event_id, const char *json_fmt,
     free(body);
   }
   return res;
+}
+
+bool mgos_watson_is_connected(void) {
+  return (s_ctx != NULL && s_ctx->is_connected);
 }
 
 bool mgos_watson_init(void) {
