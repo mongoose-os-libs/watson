@@ -129,6 +129,7 @@ bool mgos_watson_init(void) {
   }
   mcfg.ssl_cert = (char *) mgos_sys_config_get_watson_cert();
   mcfg.ssl_key = (char *) mgos_sys_config_get_watson_key();
+  mcfg.cloud_events = false;
   LOG(LL_INFO, ("IBM Watson IoT Platform client for %s", mcfg.client_id));
 
   if (!mgos_mqtt_set_config(&mcfg)) goto out;
