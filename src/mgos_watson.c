@@ -34,7 +34,7 @@ struct mgos_watson_ctx {
 static struct mgos_watson_ctx *s_ctx = NULL;
 
 static void ev_cb(void *arg) {
-  mgos_event_trigger((int) arg, NULL);
+  mgos_event_trigger((intptr_t) arg, NULL);
 }
 
 static void watson_mqtt_ev(struct mg_connection *nc, int ev, void *ev_data,
