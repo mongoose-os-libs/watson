@@ -19,8 +19,8 @@ config_schema:
   - ["watson.ca_cert", "s", "", {title: "X.509 certificate"}]
 
 libs:
-  - origin: https://github.com/mongoose-os-libs/ca-bundle
-  - origin: https://github.com/mongoose-os-libs/mqtt
+  - location: https://github.com/mongoose-os-libs/ca-bundle
+  - location: https://github.com/mongoose-os-libs/mqtt
 
 tags:
   - c
